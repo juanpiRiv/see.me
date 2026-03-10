@@ -16,12 +16,14 @@ concurrency:
 jobs:
   metrics:
     runs-on: ubuntu-latest
+    env:
+      METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
     steps:
       - name: Generate metrics SVG
-        if: ${{ secrets.METRICS_TOKEN != '' }}
+        if: ${{ env.METRICS_TOKEN != '' }}
         uses: lowlighter/metrics@latest
         with:
-          token: ${{ secrets.METRICS_TOKEN }}
+          token: ${{ env.METRICS_TOKEN }}
           user: juanpiRiv
           template: classic
           base: header, activity, community, repositories, metadata
@@ -29,5 +31,5 @@ jobs:
           filename: github-metrics.svg
 
       - name: METRICS_TOKEN not configured
-        if: ${{ secrets.METRICS_TOKEN == '' }}
+        if: ${{ env.METRICS_TOKEN == '' }}
         run: echo "METRICS_TOKEN is missing. Skipping metrics generation."
