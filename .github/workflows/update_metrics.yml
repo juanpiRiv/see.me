@@ -26,7 +26,7 @@ jobs:
           token: ${{ env.METRICS_TOKEN }}
           user: juanpiRiv
           template: classic
-          base: header, activity, community, repositories, metadata
+          base: header, activity, metadata
           config_timezone: UTC
           filename: github-metrics.svg
 
