@@ -18,11 +18,10 @@ I build clean, scalable software products and enjoy turning ideas into reliable 
 
 ## GitHub Metrics
 
-![Metrics](./github-metrics.svg)
+![Metrics](/github-metrics.svg)
 
 ## Latest Blog Posts
 
 <!-- BLOG-POST-LIST:START -->
 - RSS feed not configured yet.
 <!-- BLOG-POST-LIST:END -->
-
