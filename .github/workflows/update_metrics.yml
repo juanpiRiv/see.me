@@ -19,6 +19,9 @@ jobs:
     env:
       METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Generate metrics SVG
         if: ${{ env.METRICS_TOKEN != '' }}
         uses: lowlighter/metrics@latest
@@ -28,8 +31,32 @@ jobs:
           template: classic
           base: header, activity, metadata
           config_timezone: UTC
+          output_action: none
           filename: github-metrics.svg
+
+      - name: Apply dark gold theme
+        if: ${{ env.METRICS_TOKEN != '' }}
+        run: python scripts/theme_metrics.py
 
       - name: METRICS_TOKEN not configured
         if: ${{ env.METRICS_TOKEN == '' }}
         run: echo "METRICS_TOKEN is missing. Skipping metrics generation."
+
+      - name: Detect metrics changes
+        if: ${{ env.METRICS_TOKEN != '' }}
+        id: changes
+        run: |
+          if [ -n "$(git status --porcelain -- github-metrics.svg)" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push
+        if: ${{ env.METRICS_TOKEN != '' && steps.changes.outputs.changed == 'true' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add github-metrics.svg
+          git commit -m "chore(profile): update themed github metrics"
+          git push
