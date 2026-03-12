@@ -50,6 +50,10 @@ COLOR_MAP = {
     "#D6A84A": "#67e8f9",
     "#A6671C": "#fb923c",
     "#140D05": "#020617",
+    # Residual gold/rainbow colors from lowlighter animations
+    "#B57C1F": "#0ea5e9",
+    "#E8B866": "#67e8f9",
+    "#D39A2E": "#38bdf8",
 }
 
 TEXT_MAP = {
@@ -93,6 +97,18 @@ FIELD_REPLACEMENT = ".field{display:flex;align-items:center;margin-bottom:3px;wh
 CALENDAR_DAY_PATTERN = re.compile(r"\.calendar \.day\{outline:[^}]+\}")
 CALENDAR_DAY_REPLACEMENT = ".calendar .day{outline:1px solid rgba(34,211,238,.08);outline-offset:-1px}"
 
+RAINBOW_PATTERN = re.compile(r"@keyframes animation-rainbow\{[^}]+(?:\}[^}]*)*?\}\}")
+RAINBOW_REPLACEMENT = (
+    "@keyframes animation-rainbow{"
+    "0%,to{color:#0d9488;fill:#0d9488}"
+    "14%{color:#14b8a6;fill:#14b8a6}"
+    "29%{color:#2dd4bf;fill:#2dd4bf}"
+    "43%{color:#22d3ee;fill:#22d3ee}"
+    "57%{color:#38bdf8;fill:#38bdf8}"
+    "71%{color:#67e8f9;fill:#67e8f9}"
+    "86%{color:#0ea5e9;fill:#0ea5e9}}"
+)
+
 # Add 10% height so footer and bottom content aren't clipped.
 HEIGHT_PATTERN = re.compile(r'(<svg xmlns="[^"]+" width="\d+" )height="(\d+)"')
 
@@ -112,6 +128,9 @@ ZERO_FIELD_PATTERN = re.compile(
 
 def apply_theme(svg_text: str) -> str:
     themed = svg_text
+
+    # Replace rainbow animation with cyber palette before color map runs
+    themed = RAINBOW_PATTERN.sub(RAINBOW_REPLACEMENT, themed)
 
     # Apply minimal cyber/hacker base styles (regex works on any svg block).
     themed = SVG_STYLE_PATTERN.sub(SVG_STYLE_REPLACEMENT, themed)

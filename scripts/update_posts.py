@@ -98,8 +98,8 @@ def main() -> int:
     try:
         updated = _replace_block(readme, lines)
     except ValueError as exc:
-        print(str(exc), file=sys.stderr)
-        return 1
+        print(f"Skipping: {exc}")
+        return 0
 
     if updated != readme:
         README_PATH.write_text(updated, encoding="utf-8")

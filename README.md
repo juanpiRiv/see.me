@@ -1,6 +1,9 @@
 <h1 align="center">Juan Pablo Rivero</h1>
+
 <p align="center">
-  <code>software engineer & data engineer // building with AI, shipping fast</code>
+  <a href="https://git.io/typing-svg">
+    <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=16&duration=3000&pause=1000&color=22D3EE&center=true&vCenter=true&width=500&lines=software+engineer+%26+data+engineer;building+with+AI%2C+shipping+fast;python+%7C+java+%7C+typescript+%7C+sql;dbt+%7C+snowflake+%7C+bigquery+%7C+aws" alt="Typing SVG" />
+  </a>
 </p>
 
 <br />
@@ -65,6 +68,10 @@
 
 <p align="center">
   <img src="/github-metrics.svg" alt="GitHub metrics" />
+</p>
+
+<p align="center">
+  <img src="https://streak-stats.demolab.com?user=juanpiRiv&theme=transparent&hide_border=true&ring=22d3ee&fire=38bdf8&currStreakLabel=22d3ee&sideLabels=94a3b8&sideNums=22d3ee&currStreakNum=22d3ee&dates=334155" alt="GitHub Streak" />
 </p>
 
 <br />
